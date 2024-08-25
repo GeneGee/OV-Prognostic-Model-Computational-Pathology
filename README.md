@@ -3,7 +3,7 @@
 
 Operating System: ubuntu
 
-Terminal Setting: anaconda windows PowerShell from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Windows-x86_64.exe*
+Terminal Setting: anaconda windows PowerShell from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
 
 # Download diagnostic svs files
 ## Prepare manifest file
@@ -27,3 +27,9 @@ python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.tx
 *After downloading task finished, you will get 107 diagnostic slide svs files*
 
 # Step2 Check svs file's hierarchical structure
+
+
+
+
+
+
