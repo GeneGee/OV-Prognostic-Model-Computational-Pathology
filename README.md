@@ -14,9 +14,8 @@ Download two manifest files (Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt ) 
 *So I wrote a python script (extract.diagnostic.svs.py) to extract TCGA-OV diagnostic slide svs file from these two files*
 
 ```
-function test() {
-  console.log("python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt TCGA-OV.diagnostic_slide.manifest.txt");
-}
+python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt TCGA-OV.diagnostic_slide.manifest.txt
+
 ```
 
 '''
