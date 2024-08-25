@@ -15,19 +15,14 @@ Download two manifest files (Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt ) 
 
 ```
 python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt TCGA-OV.diagnostic_slide.manifest.txt
-
 ```
-
-'''
-python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt TCGA-OV.diagnostic_slide.manifest.txt
-'''
 
 ## 1.2 Download svs files
 *Then we could download diagnostic svs file using TCGA-OV.diagnostic_slide.manifest.txt*
 
-'''
+```
 ./gdc-client download -m ./TCGA-OV.diagnostic_slide.manifest.txt -d TCGA-OV-SVS
-'''
+```
 
 *After downloading task finished, you will get 107 diagnostic slide svs files*
 
