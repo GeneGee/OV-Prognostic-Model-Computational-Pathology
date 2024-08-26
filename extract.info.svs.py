@@ -1,3 +1,4 @@
+import os
 import openslide
 import numpy as np
 import cv2
@@ -16,10 +17,13 @@ def extract_wsi_info(wsi_path):
   dimensions = slide.level_dimensions
   if 'aperio.AppMag' in slide.properties.keys():
     level_0_magnification = int(slide.properties['aperio.AppMag'])
+    print('aperio.AppMag')
   elif 'openslide.mpp-x' in slide.properties.keys():
     level_0_magnification = 40 if int(np.floor(float(slide.properties['openslide.mpp-x'])*10))==2 else 20
+    print('openslide.mpp-x')
   else:
     level_0_magnification = 40
+    print('default')
   info_list = [width, height, num_levels, dimensions, level_0_magnification]
   #magnification = 5
   #downsample = level_0_magnification/5
@@ -30,22 +34,17 @@ def extract_wsi_info(wsi_path):
   return info_list
 
 def main():
+  fw.write("\t".join(["Width","Height","Levels","Dimensions","Level_0_magnification"])+"\n")
   fw = open(args.info_file, "w")
   for file in os.listdir(args.svs_dir):
     file_path = os.path.join(args.svs_dir, file)
     if not file_path.endswith('.svs'):
       continue
     info_recs = extract_wsi_info(file_path)
-    fw.write("\t".join(info_recs)+"\n")
+    fw.write("\t".join([str(rec) for rec in info_recs])+"\n")
   fw.close()
   
 if __name__ == "__main__":
     results = main()
     print("finished!")
     print("end script")
-
-
-
-
-
-  
