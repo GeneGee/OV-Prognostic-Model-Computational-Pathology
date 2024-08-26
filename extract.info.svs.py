@@ -34,8 +34,8 @@ def extract_wsi_info(wsi_path):
   return info_list
 
 def main():
-  fw.write("\t".join(["Width","Height","Levels","Dimensions","Level_0_magnification"])+"\n")
   fw = open(args.info_file, "w")
+  fw.write("\t".join(["Width","Height","Levels","Dimensions","Level_0_magnification"])+"\n")
   for file in os.listdir(args.svs_dir):
     file_path = os.path.join(args.svs_dir, file)
     if not file_path.endswith('.svs'):
