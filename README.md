@@ -18,7 +18,7 @@ python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.tx
 ```
 
 ## 1.2 Download TCGA-OV diagnostic WSIs with gdc-client tool
-*Then we could download diagnostic svs file using TCGA-OV.diagnostic_slide.manifest.txt*
+Then we could download diagnostic svs file using TCGA-OV.diagnostic_slide.manifest.txt
 
 ```
 ./gdc-client download -m ./TCGA-OV.diagnostic_slide.manifest.txt -d TCGA-OV-SVS
@@ -26,7 +26,16 @@ python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.tx
 
 After downloading task finished, you will get 107 diagnostic slide svs files
 
-# Step2 Check svs file's hierarchical structure
+# 2 Check svs file's basic information, QC
+## 2.1 Extract basic information of all svs files
+*Note: It is important to firstly check the basic information of all svs files, and output a file named as svs.info.txt*
+*However I have not found a convenient way to automatically extract the information*
+*So I wrote a python script (extract.info.svs.py) to extract the information from svs files, mainly using OpenSlide-python*
+
+```
+python extract.info.svs.py --svs_dir SVS_DATA_DIRECTORY --info_file SVS_INFO_FILE
+```
+
 
 
 
