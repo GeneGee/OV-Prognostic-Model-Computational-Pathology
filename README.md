@@ -5,7 +5,7 @@ Operating System: ubuntu
 
 Terminal Setting: anaconda windows PowerShell from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
 
-# 1 Download diagnostic svs files
+## 1 Download diagnostic svs files
 ## 1.1 Prepare manifest file for TCGA-OV diagnostic WSIs (whole slide images )
 Download two manifest files (Diagnostic.svs.manifest.txt TCGA-OV.manifest.txt ) from *https://portal.gdc.cancer.gov/projects/TCGA-OV*
 
@@ -27,8 +27,8 @@ Then we could download diagnostic svs file using TCGA-OV.diagnostic_slide.manife
 
 After downloading task finished, you will get 107 diagnostic slide svs files stored in TCGA-OV-SVS
 
-# 2 Segmentation, Patching, and Feature extraction of svs files
-## 2.1 Extract basic information of all svs files
+## 2 Segmentation, Patching, and Feature extraction of svs files
+## 2.1 Extract svs information
 *Note: It is important to firstly check the basic information of all svs files, and output a file named as svs.info.txt*
 *However I have not found a convenient way to automatically extract the information*
 *So I wrote a python script (extract.info.svs.py) to extract the information from svs files, mainly using OpenSlide-python*
@@ -37,7 +37,7 @@ After downloading task finished, you will get 107 diagnostic slide svs files sto
 python extract.info.svs.py --svs_dir SVS_DATA_DIR --info_file SVS_INFO_FILE
 ```
 
-## 2.2 Segmentation and patching of all svs files
+## 2.2 Segmentation and patching
 *Note: It is important to segment all svs files and divide them into patches, and here I took use of CLAM https://github.com/mahmoodlab/CLAM/tree/master to finish this task*
 *Here I only use default setting in tcga.csv, alternatively you may choose ostu method to achieve a better segmentation result*
 *Different patch size may have very tremendous impacts on downstream model training, here I chose 256X256 pixel size for each patch*
