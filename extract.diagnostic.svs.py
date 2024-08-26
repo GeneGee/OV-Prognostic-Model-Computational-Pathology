@@ -15,4 +15,5 @@ with open(all_ov_manifest_file) as fr:
     recs = line.strip().split("\t")
     if recs in diag_svs_list:
       fw.write("\t".join(recs)+"\n")
+fw.close()
   
