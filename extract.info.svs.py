@@ -1,6 +1,7 @@
 import os
 import openslide
 import numpy as np
+import pandas as pd
 import cv2
 import argparse
 
@@ -25,11 +26,11 @@ def extract_wsi_info(wsi_path):
     level_0_magnification = 40
     print('default')
   info_list = [width, height, num_levels, dimensions, level_0_magnification]
-  properties = []
-  for key in slide.properties.keys():
-    properties.append([key, slide.properties[key]])
-    print([key, slide.properties[key]])
-  info_list.append(properties)
+  #properties = []
+  #for key in slide.properties.keys():
+  #  properties.append([key, slide.properties[key]])
+  #  print([key, slide.properties[key]])
+  #info_list.append(properties)
   #magnification = 5
   #downsample = level_0_magnification/5
   #level = slide.get_best_level_for_downsample(downsample)
