@@ -14,21 +14,19 @@ with open(svs_fi) as fr:
     fi = recs[0]
     if fi == "slide_id":
       continue
-    svs_list.append("-".join(fi.split('-')[:-1]))
+    svs_list.append(fi.split('.')[0])
 with open(tcga_ov_clin_fi) as fr:
   for line in fr.readlines():
     recs = line.strip().split(',')
     sample = recs[1]
     if sample == "slide_id":
-      headers = recs
-      fw.write(",".join(headers+['label'])+'\n')
+      fw.write(",".join(recs+['label'])+'\n')
       continue
     if sample not in svs_list:
       continue
-    if recs[headers.index('OS_MONTHS')] <= 24:
+    if float(recs[-3]) < 24:
       fw.write(",".join(recs+['Bad'])+'\n')
     else:
       fw.write(",".join(recs+['Good'])+'\n')
 fw.close()
-    
     
