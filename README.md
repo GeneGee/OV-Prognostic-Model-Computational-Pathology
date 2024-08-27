@@ -4,9 +4,7 @@ Operating System: Linux
 Anaconda built from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
 
 ## Prepare manifest file for TCGA-OV diagnostic WSIs
-Download two manifest files **Diagnostic.svs.manifest.txt**(all diagnostic svs files), **TCGA-OV.manifest.txt**(all files of TCGA-OV) from 
-
-*https://portal.gdc.cancer.gov/projects/TCGA-OV*
+Download two manifest files **Diagnostic.svs.manifest.txt**(all diagnostic svs files), **TCGA-OV.manifest.txt**(all files of TCGA-OV) from *https://portal.gdc.cancer.gov/projects/TCGA-OV*
 
 *Note: It is important to discriminate "**Diagnostic Slide**" and "**Tissue Slide**", usually we need use **Diagnostic Slide** to train models.*
 *However I have not found a direct way of downloading diagnostic slide by cancer type.*
