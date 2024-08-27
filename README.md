@@ -52,7 +52,7 @@ python extract_features_fp.py --data_h5_dir PATCH_DIR --data_slide_dir SVS_DIR -
 ```
 
 ## 3 Clinical information preparation
-##3.1 Download clinical information from cbioportal https://cbioportal-datahub.s3.amazonaws.com/ov_tcga.tar.gz
+## 3.1 Download clinical information
 *Download clinical information from cbioportal https://cbioportal-datahub.s3.amazonaws.com/ov_tcga.tar.gz*
 
 
