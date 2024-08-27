@@ -62,8 +62,34 @@ python extract_features_fp.py --data_h5_dir PATCH_DIR --data_slide_dir SVS_DIR -
 
 ## Download clinical information
 *Download clinical information from cbioportal https://cbioportal-datahub.s3.amazonaws.com/ov_tcga.tar.gz*
+*Note: to generate clinical information file which would be used for labelling of samples, that is to divide samples by prognosis*
+*Firstly, use **pretreat.clinical_info.r** to merge **data_clinical_patient.txt** and **data_clinical_sample.txt**, and select patients who had os data*
+```
+Rscript pretreat.clinical_info.r
+```
+Then you will get a clinical info file: **tcga_ov_clin.csv**
+In addition, we need choose samples which have respective diagnostic slide WSIs file
+So, I wrote a python script **select_samples_with_WSI.py**
+```
+python select_samples_with_WSI.py tcga_ov_clin.csv process_list_autogen.csv tcga_ov_clin.prognosis.csv
+```
 
+## Training Splits
+```
+python create_splits_seq.ov_prognosis.py --task task_1_ov_prognosis --seed 1 --k 10
+```
 
+## GPU Training for Prognosis Good vs. Bad Classification
+```
+python main.ov_prognosis.py --drop_out 0.25 --early_stopping --lr 2e-4 --k 10 --exp_code task_1_ov_prognosis --weighted_sample --bag_loss ce --inst_loss svm --task task_1_ov_prognosis --model_type clam_sb --embed_dim 1024
+```
 
+## Evaluation Model
+```
+python eval.ov_prognosis.py --k 10 --models_exp_code task_1_ov_prognosis_s1 --save_exp_code task_1_ov_prognosis_s1_cv --task task_1_ov_prognosis --model_type clam_sb
+```
 
-
+## Heatmap Visualization
+```
+python create_heatmaps.py --config config.ov_prognosis.yaml
+```
