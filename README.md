@@ -3,11 +3,10 @@ Operating System: ubuntu
 Terminal Setting: anaconda ubuntu PowerShell 
 built from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
 
-## Download diagnostic svs files
 ## Prepare manifest file for TCGA-OV diagnostic WSIs
 Download two manifest files **Diagnostic.svs.manifest.txt**(all diagnostic svs files), **TCGA-OV.manifest.txt**(all files of TCGA-OV) from *https://portal.gdc.cancer.gov/projects/TCGA-OV*
 
-*Note: It is important to discriminate "**Diagnostic Slide**" and "**Tissue Slide**", usually we need **Diagnostic Slide** to train models.*
+*Note: It is important to discriminate "**Diagnostic Slide**" and "**Tissue Slide**", usually we need use **Diagnostic Slide** to train models.*
 *However I have not found a direct way of downloading diagnostic slide by cancer type.*
 *So I wrote a python script (**extract.diagnostic.svs.py**) to extract TCGA-OV diagnostic slide files*
 
@@ -32,7 +31,6 @@ After downloading task finished, you will get 107 diagnostic slide svs files sto
 ```
 python rename.wsi.py TCGA-OV-SVS_DIR
 ```
-## Segmentation, Patching, and Feature extraction
 ## Extract svs information
 *Note: It is important to firstly check the basic information of all svs files, and output a file named as svs.info.txt*
 *However I have not found a convenient way to automatically extract the information*
@@ -52,11 +50,12 @@ python create_patches_fp.py --source SVS_DATA_DIR --save_dir PATCH_DIR --patch_s
 After segmentation task finished, you will get results in PATCH_DIR
 
 ## Feature extraction
+*Note: By default, CLAM use a truncated pretrained model (ResNet50) to extract a 1024D vector for each patch, you may also choose foundation model CONCH or UNI*
+*which will take a much longer time and computation resource.*
 ```
-python extract_features_fp.py --data_h5_dir PATCH_DIR --data_slide_dir SVS_DIR --csv_path PATCH_DIR\process_list_autogen.csv --feat_dir FEATURE_DIR --batch_size 126 --slide_ext .svs
+python extract_features_fp.py --data_h5_dir PATCH_DIR --data_slide_dir SVS_DIR --csv_path PATCH_DIR\process_list_autogen.csv --feat_dir FEATURE_DIR --batch_size 12 --slide_ext .svs
 ```
 
-## Clinical information preparation
 ## Download clinical information
 *Download clinical information from cbioportal https://cbioportal-datahub.s3.amazonaws.com/ov_tcga.tar.gz*
 
