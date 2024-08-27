@@ -1,12 +1,10 @@
-# OV-Prognostic-Model-Computational-Pathology
-# Environment
-
+## Environment
 Operating System: ubuntu
+Terminal Setting: anaconda ubuntu PowerShell 
+built from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
 
-Terminal Setting: anaconda windows PowerShell from *https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh*
-
-## 1 Download diagnostic svs files
-## 1.1 Prepare manifest file for TCGA-OV diagnostic WSIs
+## Download diagnostic svs files
+## Prepare manifest file for TCGA-OV diagnostic WSIs
 Download two manifest files **Diagnostic.svs.manifest.txt**(all diagnostic svs files), **TCGA-OV.manifest.txt**(all files of TCGA-OV) from *https://portal.gdc.cancer.gov/projects/TCGA-OV*
 
 *Note: It is important to discriminate "**Diagnostic Slide**" and "**Tissue Slide**", usually we need **Diagnostic Slide** to train models.*
@@ -18,15 +16,22 @@ python extract.diagnostic.svs.py Diagnostic.svs.manifest.txt TCGA-OV.manifest.tx
 ```
 After finishing scripts, you will get a manifest file **TCGA-OV.diagnostic_slide.manifest.txt** to download TCGA-OV diagnostic slide files.
 
-## 1.2 Download TCGA-OV diagnostic WSIs with gdc-client tool
+## Download TCGA-OV diagnostic WSIs with gdc-client tool
 Then we could download diagnostic svs files using **TCGA-OV.diagnostic_slide.manifest.txt** with gdc-client tool https://gdc.cancer.gov/system/files/public/file/gdc-client_2.0.0_Ubuntu_x64-py3.8-ubuntu-20.04.zip
 
 ```
-./gdc-client download -m ./TCGA-OV.diagnostic_slide.manifest.txt -d TCGA-OV-SVS
+./gdc-client download -m ./TCGA-OV.diagnostic_slide.manifest.txt -d TCGA-OV-SVS_DIR
 ```
 
 After downloading task finished, you will get 107 diagnostic slide svs files stored in directory: **TCGA-OV-SVS**.
 
+## Rename WSIs files
+*Note: Because there are differences between the name of WSIs files and their respective samples' name in clinical information file,*
+*We need to rename WSIs files to keep accordance with downstream analysis. Here, I wrote a script to finish this task.*
+
+```
+python rename.wsi.py TCGA-OV-SVS_DIR
+```
 ## 2 Segmentation, Patching, and Feature extraction
 ## 2.1 Extract svs information
 *Note: It is important to firstly check the basic information of all svs files, and output a file named as svs.info.txt*
