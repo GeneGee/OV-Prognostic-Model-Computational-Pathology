@@ -7,6 +7,7 @@ import argparse
 
 # set svs directory path
 parser = argparse.ArgumentParser(description='Configurations for WSIs info extraction')
+parser.add_argument('--magnification', type=float, default=20.0, help='Magnification')
 parser.add_argument('--svs_dir', type=str, default=None, help='WSIs directory')
 parser.add_argument('--new_svs_dir', type=str, default=None, help='new WSIs directory')
 parser.add_argument('--info_file', type=str, default=None, help='output file stored WSIs info')
@@ -32,7 +33,7 @@ def extract_wsi_info(wsi_path):
   #  properties.append([key, slide.properties[key]])
   #  print([key, slide.properties[key]])
   #info_list.append(properties)
-  magnification = 20
+  magnification = args.magnification
   downsample = level_0_magnification/magnification
   level = slide.get_best_level_for_downsample(downsample)
   image = slide.read_region((0,0), level, slide.level_dimensions[level])
@@ -50,7 +51,7 @@ def main():
       continue
     info_recs, image = extract_wsi_info(file_path)
     fw.write("\t".join([str(rec) for rec in info_recs])+"\n")
-    new_image_path = os.path.join(args.new_svs_dir,sample+".tiff")
+    new_image_path = os.path.join(args.new_svs_dir,sample+".jpg")
     cv2.imwrite(new_image_path, image)
   fw.close()
   
