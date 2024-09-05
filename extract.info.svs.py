@@ -34,7 +34,7 @@ def extract_wsi_info(wsi_path, new_path):
   downsample = float(magnification)/level_0_magnification
   new_image = pyvips.Image.new_from_file(wsi_path)
   resize_image = new_image.resize(downsample)
-  resize_image.wirte_to_file(new_path)
+  resize_image.write_to_file(new_path, compression="jpeg", tile=True, pyramid=True)
   return info_list
 
 def main():
