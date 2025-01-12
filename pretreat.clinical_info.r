@@ -2,7 +2,7 @@ ov_patient_clin <- read.table("data_clinical_patient.txt", sep='\t', header = TR
                               na.strings = c("[Not Available]","[Not Applicable]"), stringsAsFactors = TRUE, skip=4)
 ov_sample_clin <- read.table("data_clinical_sample.txt", sep='\t', header = TRUE,
                              na.strings = c("[Not Available]"), stringsAsFactors = TRUE, skip=4)
-ov_clin <- merge(paad_sample_clin,paad_patient_clin,by=c('PATIENT_ID'))
+ov_clin <- merge(ov_sample_clin, ov_patient_clin,by=c('PATIENT_ID'))
 ov_clin_evaled <- subset(ov_clin, !(OS_MONTHS %in% c(NA)), 
                            select = c("PATIENT_ID","SAMPLE_ID","SEX","AGE","CANCER_TYPE_DETAILED","GRADE",
                                        "CLINICAL_STAGE","ECOG_SCORE","OS_STATUS","OS_MONTHS","DFS_STATUS","DFS_MONTHS"))
